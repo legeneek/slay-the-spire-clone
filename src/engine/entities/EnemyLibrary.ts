@@ -18,7 +18,7 @@ export const EnemyFactory: Record<string, () => Enemy> = {
         intentType: IntentType.BUFF,
         baseDamage: 0,
         description: () => "Gains 3 Strength.",
-        execute: (self, target) => {
+        execute: (self) => {
           self.applyStatusEffect("strength", 3);
         },
       },
@@ -59,7 +59,7 @@ export const EnemyFactory: Record<string, () => Enemy> = {
         name: "Scrape",
         intentType: IntentType.DEBUFF,
         description: () => "Applies 1 Vulnerable.",
-        execute: (self, target) => {
+        execute: (_, target) => {
           target.applyStatusEffect("vulnerable", 1, 1);
         },
       },
@@ -107,7 +107,7 @@ export const EnemyFactory: Record<string, () => Enemy> = {
         name: "Bellow",
         intentType: IntentType.BUFF,
         description: () => "Gains 3 Strength.",
-        execute: (self, target) => {
+        execute: (self) => {
           self.applyStatusEffect("strength", 3);
         },
       },
@@ -136,7 +136,7 @@ export const EnemyFactory: Record<string, () => Enemy> = {
         name: "Siphon Soul",
         intentType: IntentType.DEBUFF,
         description: () => "Drains 2 Strength and 2 Dexterity.",
-        execute: (self, target) => {
+        execute: (_, target) => {
           // NOTE: Requires Dexterity to be implemented as a status effect.
           // Assuming it works like Strength, we would do:
           target.applyStatusEffect("strength", -2);
@@ -185,7 +185,7 @@ export const EnemyFactory: Record<string, () => Enemy> = {
         name: "Bolt",
         intentType: IntentType.DEBUFF,
         description: () => "Shuffles a Dazed into your discard pile.",
-        execute: (self, target) => {
+        execute: (_, target) => {
           if (isPlayer(target) && CardLibrary["dazed"]) {
             const dazedCard = CardFactory.createInstance(CardLibrary["dazed"]);
             target.discardPile.push(dazedCard);
