@@ -1,6 +1,6 @@
 # Slay the Spire Clone
 
-This project is a web version of Slay the Spire implemented through vibe coding.
+This project is a web version of Slay the Spire implemented in 3 days through vibe coding.
 
 ## Original Prompt
 
