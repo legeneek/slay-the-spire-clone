@@ -1,54 +1,67 @@
-# React + TypeScript + Vite
+# Slay the Spire Clone
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This project is a web version of Slay the Spire implemented through vibe coding.
 
-Currently, two official plugins are available:
+## Original Prompt
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+```
+I need your help to develop a web version of Slay the Spire. This process may involve multiple conversations.
 
-## Expanding the ESLint configuration
-
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
-
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+Requirements:
+1.Implement using TypeScript.
+2.Pure client-side, no server-side.
+3.Provide a detailed and complete design.
+4.Ensure good system design and module separation, with good scalability and readability.
+5.Prioritize the implementation of game logic parts unrelated to UI, maintaining UI agnosticism.
+6.Select appropriate libraries as needed, specify the version numbers of the libraries used, and avoid using features that are going to be deprecated
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## Conceptual Diagram
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+AI-generated conceptual diagram
 
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
 ```
++-----------------------------------------------------------------+
+| UI Layer                                                        |
+| (React, Vue, Svelte, or Vanilla JS/HTML/CSS)                    |
+|                                                                 |
+| - Renders Game State (Player HP, Hand, Enemies, etc.)           |
+| - Captures User Input (Card Clicks, End Turn Button)            |
++----------------------^---------------------+--------------------+
+                       |                     |
+                (State Updates)        (User Actions)
+                       |                     |
++----------------------v---------------------+--------------------+
+| Game Controller (Facade)                                        |
+| (The single entry point for the UI)                             |
++-----------------------------------------------------------------+
+                       | (Calls methods on managers)
+                       v
++-----------------------------------------------------------------+
+| Game Engine (Core Logic)                                        |
+| +-----------------+ +-----------------+ +---------------------+ |
+| | State Manager   | | Event Manager   | | Combat Manager      | |
+| | (Zustand)       | | (Pub/Sub)       | | (Turn Logic)        | |
+| +-----------------+ +-----------------+ +---------------------+ |
+| +-----------------+ +-----------------+ +---------------------+ |
+| | Entity Models   | | Card Logic      | | Relic Logic         | |
+| | (Player/Enemy)  | | (Definitions)   | | (Passive Effects)   | |
+| +-----------------+ +-----------------+ +---------------------+ |
++-----------------------------------------------------------------+
+```
+
+## Current Features
+
+- Only the character Ironclad is available
+- Some red cards and curse cards have been added, but cards cannot be upgraded
+- Only one event is available
+- No potions are included
+- Only 4 relics are available
+- Only Act 1 is implemented
+- The encounters and intents of the monsters are random.
+- A very rudimentary UI
+- AI-generated material images
+
+## How to experience
+
+Start the local server using `npm run dev`, or visit [here](https://legeneek.github.io/mini-game/sts-clone/)
